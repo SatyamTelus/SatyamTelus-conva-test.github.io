@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="https://unpkg.com/konva@8.3.11/konva.min.js"></script>
+    <meta charset="utf-8" />
+    <title>Konva Rect Demo</title>
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+        background-color: #f0f0f0;
+      }
+    </style>
+  </head>
+  <body>
+    <center><h2>Hover and Move the Rectangle</h2>
+    <h3>Double click to get star⭐️</h3></center>
+    <div id="container"></div>
+   
+
+    <script>
+      var width = window.innerWidth;
+      var height = window.innerHeight;
+
+      var stage = new Konva.Stage({
+        container: "container",
+        width: width,
+        height: height,
+      });
+
+      var layer = new Konva.Layer();
+      stage.add(layer);
+   
+
+      var rect1 = new Konva.Rect({
+        x: 400,
+        y: 200,
+        width: 100,
+        height: 50,
+        fill: "green",
+        stroke: "black",
+        strokeWidth: 4,
+        draggable: true,
+      });
+
+    //   let rect2 = null;
+    //   let currentlyDrawing = false;
+
+    //   stage.on("click", mousedownHandler());
+    //   stage.on("mousemove", mousemoveHandler() );
+    //   stage.on("mouseup", mouseupHandler());
+
+      
+
+    //   function mousedownHandler() {
+        
+    //     currentlyDrawing = true;
+    //     rect2 = new Konva.Rect({
+            
+    //       x: group.getRelativePointerPosition().x ,
+    //       y: group.getRelativePointerPosition().y ,
+    //       width: 0,
+    //       height: 0,
+    //       fill: "cyan",
+    //       stroke: "black",
+          
+    //       //draggable: true,
+    //     });
+    //     group.add(rect2);
+    //   }
+
+    //   function mouseupHandler() {
+    //     currentlyDrawing = false;
+    //   }
+    //   function mousemoveHandler() {
+    //     if (!currentlyDrawing === false) return false;
+    //     const newWidth = group.getRelativePointerPosition().x - rect2.x();
+    //     const newHeight = group.getRelativePointerPosition().y - rect2.y();
+    //     rect2.width(newWidth).height(newHeight);
+    //   }
+
+      //   rect1.to({
+      //     duration: 2,
+      //     x:550
+      //   }
+
+      //   )
+
+      rect1.on("mouseover", function () {
+        this.fill("rgba(0,100,100,0.4)");
+        stage.container().style.cursor = "pointer";
+        this.width(200);
+        this.height(100);
+      });
+
+      rect1.on("mouseout", function () {
+        this.fill("green");
+        stage.container().style.cursor = "default";
+        this.width(100);
+        this.height(50);
+      });
+      rect1.on("dblclick", function() {
+        rect1.remove();
+
+       
+        var star = new Konva.Star({
+          x: 400 ,
+          y: 200 ,
+          numPoints: 5,
+          innerRadius:  30,
+          outerRadius: 50,
+          fill: '#89b717',
+          opacity: 0.8,
+          draggable: true
+          
+          });
+
+      layer.add(star);
+
+
+      } ) 
+
+      // add the shape to the layer
+      layer.add(rect1);
+    //   layer.add(rect2);
+
+      
+    </script>
+  </body>
+</html>
